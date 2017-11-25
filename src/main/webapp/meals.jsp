@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <head>
+    <link  href="css/style.css">
     <title>meals</title>
 
 
@@ -22,15 +23,25 @@
 
 <body>
 <section>
-    <h3><a href="index.html">Home</a></h3>
-    <h2>Meals</h2>
+    <a href="index.html">Home</a>
+
+
+
     <hr/>
+
+    <a href="meals?action=create">Add</a>
+
+    <br/>
+    <br/>
+
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
             <th>Date</th>
             <th>Description</th>
             <th>Calories</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <c:forEach items="${meals}" var="meal">
@@ -44,9 +55,12 @@
                 </td>
                 <td>${meal.description}</td>
                 <td>${meal.calories}</td>
+                <td><a href="meals?action=update&id=${meal.id}">Update</a></td>
+                <td><a href="meals?action=delete&id=${meal.id}">Delete</a></td>
+
             </tr>
         </c:forEach>
     </table>
-</section>
+</section>  `
 </body>
 </html>
