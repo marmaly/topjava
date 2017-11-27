@@ -2,8 +2,8 @@ package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.javawebinar.topjava.dao.Dao;
-import ru.javawebinar.topjava.dao.MealsDao;
+import ru.javawebinar.topjava.dao.MealRepository;
+import ru.javawebinar.topjava.dao.InMemoryMealRepositoryImpl;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.util.MealsUtil;
 
@@ -22,12 +22,12 @@ import java.util.Objects;
 public class MealServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(MealServlet.class);
 
-    private Dao mealsDaoServlet;
+    private MealRepository mealsDaoServlet;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        mealsDaoServlet = new MealsDao();
+        mealsDaoServlet = new InMemoryMealRepositoryImpl();
     }
 
 

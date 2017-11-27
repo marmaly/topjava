@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Created by grh on 11/20/17.
  */
-public class MealsDao implements Dao {
+public class InMemoryMealRepositoryImpl implements MealRepository {
 
   private   Map<Integer, Meal> mealsDao = new ConcurrentHashMap<>();
    private AtomicInteger counter = new AtomicInteger(0);

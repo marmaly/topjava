@@ -7,7 +7,7 @@ import java.util.Collection;
 /**
  * Created by grh on 11/20/17.
  */
-public interface Dao {
+public interface MealRepository {
 
     public Meal createAddSave(Meal meal);
 
