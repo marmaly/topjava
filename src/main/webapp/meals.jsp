@@ -24,13 +24,8 @@
 <body>
 <section>
     <a href="index.html">Home</a>
-
-
-
     <hr/>
-
     <a href="meals?action=create">Add</a>
-
     <br/>
     <br/>
 

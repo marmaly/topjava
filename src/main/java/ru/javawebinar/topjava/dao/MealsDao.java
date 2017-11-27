@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MealsDao implements Dao {
 
   private   Map<Integer, Meal> mealsDao = new ConcurrentHashMap<>();
-   private AtomicInteger counter = new AtomicInteger();
+   private AtomicInteger counter = new AtomicInteger(0);
 
     {
         createAddSave(new Meal(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500));
@@ -29,7 +29,7 @@ public class MealsDao implements Dao {
     @Override
     public Meal createAddSave(Meal meal) {
 
-        if(meal.isNew()) meal.setId(counter.getAndIncrement());
+        if(meal.isNew()) {meal.setId(counter.incrementAndGet());}
 
         return mealsDao.put(meal.getId(), meal);
     }
