@@ -26,9 +26,10 @@ public class MealWithExceed {
         this.exceed = exceed;
     }
 
-    public MealWithExceed(LocalDateTime dateTime, String description, int calories, boolean exceed) {
-        this(null, dateTime, description, calories, exceed);
+    public Integer getId() {
+        return id;
     }
+
     public LocalDateTime getDateTime() {
         return dateTime;
     }
@@ -45,11 +46,14 @@ public class MealWithExceed {
         return exceed;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    @Override
+    public String toString() {
+        return "MealWithExceed{" +
+                "id=" + id +
+                ", dateTime=" + dateTime +
+                ", description='" + description + '\'' +
+                ", calories=" + calories +
+                ", exceed=" + exceed +
+                '}';
     }
 }
