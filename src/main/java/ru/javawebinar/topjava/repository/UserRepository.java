@@ -9,9 +9,11 @@ import java.util.Collection;
 public interface UserRepository {
     public User createAddSave(User user);
 
-    public void delete(int id);
+    public boolean delete(int id);
 
     public User read(int id);
 
     public Collection<User> getAllUsersList();
+
+    public User getByEmail(String email);
 }
