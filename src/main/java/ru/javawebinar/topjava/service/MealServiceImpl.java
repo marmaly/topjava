@@ -1,8 +1,8 @@
 package ru.javawebinar.topjava.service;
 
-import ru.javawebinar.topjava.repository.UserMealRepository;
+import ru.javawebinar.topjava.repository.MealRepository;
 
 public class MealServiceImpl {
 
-    private UserMealRepository repository;
+    private MealRepository repository;
 }
