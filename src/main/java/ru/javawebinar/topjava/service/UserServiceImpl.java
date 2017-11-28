@@ -6,12 +6,14 @@ import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.util.List;
 
-/**
- * Created by grh on 11/28/17.
- */
+
 public class UserServiceImpl implements UserService {
 
     private UserRepository repository;
+
+    public void setRepository(UserRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public User createAddSave(User user) {
