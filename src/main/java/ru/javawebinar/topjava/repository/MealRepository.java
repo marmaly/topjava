@@ -4,9 +4,7 @@ import ru.javawebinar.topjava.model.Meal;
 
 import java.util.Collection;
 
-/**
- * Created by grh on 11/20/17.
- */
+
 public interface MealRepository {
 
     public Meal createAddSave(Meal meal);

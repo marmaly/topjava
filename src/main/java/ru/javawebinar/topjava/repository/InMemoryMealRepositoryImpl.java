@@ -9,9 +9,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * Created by grh on 11/20/17.
- */
+
 public class InMemoryMealRepositoryImpl implements MealRepository {
 
   private   Map<Integer, Meal> mealsDao = new ConcurrentHashMap<>();

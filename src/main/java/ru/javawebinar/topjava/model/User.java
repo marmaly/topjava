@@ -6,9 +6,7 @@ import java.util.Set;
 
 import static ru.javawebinar.topjava.util.MealsUtil.DEFAULT_CALORIES_PER_DAY;
 
-/**
- * Created by grh on 11/28/17.
- */
+
 public class User extends AbstractNamedEntity {
 
     private String email;
