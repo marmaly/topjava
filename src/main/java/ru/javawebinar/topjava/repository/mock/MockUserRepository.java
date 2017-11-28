@@ -10,9 +10,6 @@ import java.util.Collections;
 import java.util.List;
 
 
-/**
- * Created by grh on 11/28/17.
- */
 public class MockUserRepository implements UserRepository {
 
     private static final Logger log = LoggerFactory.getLogger(MockUserRepository.class);
