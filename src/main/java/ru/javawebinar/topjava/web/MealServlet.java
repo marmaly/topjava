@@ -39,7 +39,7 @@ public class MealServlet extends HttpServlet {
                 Integer.valueOf(id),
                 LocalDateTime.parse(request.getParameter("dateTime")),
                 request.getParameter("description"),
-                Integer.valueOf(request.getParameter("calories")));
+                Integer.parseInt(request.getParameter("calories")));
         log.info(meal.isNew() ? "Create {}" : "Update {}", meal);
         mealsDaoServlet.createAddSave(meal);
         response.sendRedirect("meals");
