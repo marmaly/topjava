@@ -21,19 +21,19 @@ public class MockUserRepository implements UserRepository {
     }
 
     @Override
-    public User createAddSave(User user) {
+    public User save(User user) {
         log.info("save {}", user);
         return user;
     }
 
     @Override
-    public User read(int id) {
+    public User get(int id) {
         log.info("get {}", id);
         return null;
     }
 
     @Override
-    public List<User> getAllUsersList() {
+    public List<User> getAll() {
         log.info("getAll");
         return Collections.emptyList();
     }

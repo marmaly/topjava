@@ -34,12 +34,12 @@ public class User extends AbstractNamedEntity {
         this.roles = roles;
     }
 
-    public String getEmale() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmale(String emale) {
-        this.email = emale;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
