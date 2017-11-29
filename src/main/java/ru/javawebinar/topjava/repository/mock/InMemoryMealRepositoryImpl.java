@@ -23,7 +23,7 @@ import static ru.javawebinar.topjava.repository.mock.InMemoryUserRepositoryImpl.
 @Repository
 public class InMemoryMealRepositoryImpl implements MealRepository {
 
-    private Map<Integer, Meal> repository = new ConcurrentHashMap<>();
+    private Map<Integer, Map<Integer, Meal>> repository = new ConcurrentHashMap<>();
     private AtomicInteger counter = new AtomicInteger(0);
 
     {
