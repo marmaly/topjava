@@ -7,13 +7,13 @@ import java.util.Collection;
 
 
 public interface UserRepository {
-    public User createAddSave(User user);
+    public User save(User user);
 
     public boolean delete(int id);
 
-    public User read(int id);
+    public User get(int id);
 
-    public Collection<User> getAllUsersList();
+    public Collection<User> getAll();
 
     public User getByEmail(String email);
 }

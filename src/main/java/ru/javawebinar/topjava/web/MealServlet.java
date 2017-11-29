@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.javawebinar.topjava.AuthorizedUser;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.repository.mock.InMemoryMealRepositoryImpl;
 import ru.javawebinar.topjava.model.Meal;
@@ -20,12 +21,12 @@ import java.util.Objects;
 public class MealServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(MealServlet.class);
 
-    private MealRepository mealsDaoServlet;
+    private MealRepository repository;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        mealsDaoServlet = new InMemoryMealRepositoryImpl();
+        repository = new InMemoryMealRepositoryImpl();
     }
 
 
@@ -41,7 +42,7 @@ public class MealServlet extends HttpServlet {
                 request.getParameter("description"),
                 Integer.parseInt(request.getParameter("calories")));
         log.info(meal.isNew() ? "Create {}" : "Update {}", meal);
-        mealsDaoServlet.createAddSave(meal);
+        repository.save(meal, AuthorizedUser.id());
         response.sendRedirect("meals");
     }
 
@@ -55,20 +56,20 @@ public class MealServlet extends HttpServlet {
             log.info("getAll");
             // request.setAttribute("meals", MealsUtil.getWithExceeded(MealsUtil.MEALS, MealsUtil.DEFAULT_CALORIES_PER_DAY));
 
-            request.setAttribute("meals", MealsUtil.getWithExceeded(mealsDaoServlet.getAllMealsList(), 2000));
+            request.setAttribute("meals", MealsUtil.getWithExceeded(repository.getAll(AuthorizedUser.id()), MealsUtil.DEFAULT_CALORIES_PER_DAY));
             request.getRequestDispatcher("/meals.jsp").forward(request, response);
         }
 
         else if (action.equals("delete")) {
             int id = getId(request);
             log.info("Delete {}", id);
-            mealsDaoServlet.delete(id);
+            repository.delete(id, AuthorizedUser.id());
             response.sendRedirect("meals");
         }
 
         else {
             final Meal meal = action.equals("create") ? new Meal(LocalDateTime.now(), "", 1000)
-                    : mealsDaoServlet.read(getId(request));
+                    : repository.get(getId(request), AuthorizedUser.id());
             request.setAttribute("meal", meal);
             request.getRequestDispatcher("add&change.jsp").forward(request, response);
         }
