@@ -5,17 +5,15 @@ import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.util.List;
 
-/**
- * Created by grh on 11/28/17.
- */
+
 public interface UserService {
 
 
-    User createAddSave(User user);
+    User create(User user);
 
     void delete(int id) throws NotFoundException;
 
-    User read(int id) throws NotFoundException;
+    User get(int id) throws NotFoundException;
 
     User getByEmail(String email) throws NotFoundException;
 

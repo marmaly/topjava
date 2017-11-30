@@ -26,13 +26,13 @@ public abstract class AbstractUserController {
 
     public User get(int id) {
         log.info("get {}", id);
-        return service.read(id);
+        return service.get(id);
     }
 
     public User create(User user) {
         log.info("create {}", user);
         checkNew(user);
-        return service.createAddSave(user);
+        return service.create(user);
     }
 
     public void delete(int id) {
