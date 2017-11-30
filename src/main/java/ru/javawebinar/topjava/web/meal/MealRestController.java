@@ -8,6 +8,7 @@ import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.MealWithExceed;
 import ru.javawebinar.topjava.service.MealService;
 import ru.javawebinar.topjava.util.MealsUtil;
+import ru.javawebinar.topjava.util.TimeUtil;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -71,8 +72,8 @@ public class MealRestController {
         log.info("getBetween dates({} - {}) time({} - {}) for user {}", startDate, endDate, startTime, endTime, userId);
 
         List<Meal> mealsDateFiltered = service.getBetweenDates(
-                startDate != null ? startDate : DateTimeUtil.MIN_DATE,
-                endDate != null ? endDate : DateTimeUtil.MAX_DATE, userId);
+                startDate != null ? startDate : TimeUtil.MIN_DATE,
+                endDate != null ? endDate : TimeUtil.MAX_DATE, userId);
 
         return MealsUtil.getFilteredWithExceeded(mealsDateFiltered,
                 startTime != null ? startTime : LocalTime.MIN,
