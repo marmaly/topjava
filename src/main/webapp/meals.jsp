@@ -6,29 +6,34 @@
 <head>
     <link  href="css/style.css">
     <title>meals</title>
-
-
-    <style>
-        .normal {
-            color: green;
-        }
-
-        .exceeded {
-            color: red;
-        }
-    </style>
-
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
-
 <body>
 <section>
     <a href="index.html">Home</a>
+    <h2>Meals</h2>
+    <form method="post" action="meals?action=filter">
+        <dl>
+            <dt>From Date:</dt>
+            <dd><input type="date" name="startDate" value="${param.startDate}"></dd>
+        </dl>
+        <dl>
+            <dt>To Date:</dt>
+            <dd><input type="date" name="endDate" value="${param.endDate}"></dd>
+        </dl>
+        <dl>
+            <dt>From Time:</dt>
+            <dd><input type="time" name="startTime" value="${param.startTime}"></dd>
+        </dl>
+        <dl>
+            <dt>To Time:</dt>
+            <dd><input type="time" name="endTime" value="${param.endTime}"></dd>
+        </dl>
+        <button type="submit">Filter</button>
+    </form>
     <hr/>
-    <a href="meals?action=create">Add</a>
-    <br/>
-    <br/>
-
+    <a href="meals?action=create">Add Meal</a>
+    <hr/>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
