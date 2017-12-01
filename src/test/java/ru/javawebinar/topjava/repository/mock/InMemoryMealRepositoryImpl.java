@@ -53,6 +53,7 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
 
     @PostConstruct
     public void postConstruct() {
+
         log.info("+++ PostConstruct");
     }
 
