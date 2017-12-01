@@ -13,6 +13,8 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 public class UserServlet extends HttpServlet {
 
+    private static final Logger log = getLogger(UserServlet.class);
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int userId = Integer.parseInt(request.getParameter("userId"));
@@ -20,12 +22,10 @@ public class UserServlet extends HttpServlet {
         response.sendRedirect("meals");
     }
 
-
-    private static final Logger LOG = getLogger(UserServlet.class);
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-LOG.debug("redirect to userlist");
-
-        request.getRequestDispatcher("/userList.jsp").forward(request, response);
+        log.debug("forward to users");
+        request.getRequestDispatcher("/users.jsp").forward(request, response);
     }
 }
+
