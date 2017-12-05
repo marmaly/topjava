@@ -32,7 +32,6 @@ public class UserServiceTest {
         SLF4JBridgeHandler.install();
     }
 
-
     @Autowired
     private UserService service;
 
