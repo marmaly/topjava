@@ -23,13 +23,11 @@ import java.util.stream.Stream;
 import static ru.javawebinar.topjava.UserTestData.ADMIN_ID;
 import static ru.javawebinar.topjava.UserTestData.USER_ID;
 
-
 @Repository
 public class InMemoryMealRepositoryImpl implements MealRepository {
-
     private static final Logger log = LoggerFactory.getLogger(InMemoryUserRepositoryImpl.class);
 
-
+    // Map  userId -> (mealId-> meal)
     private Map<Integer, Map<Integer, Meal>> repository = new ConcurrentHashMap<>();
     private AtomicInteger counter = new AtomicInteger(0);
 
@@ -39,6 +37,7 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
         save(new Meal(LocalDateTime.of(2015, Month.JUNE, 1, 14, 0), "Админ ланч", 510), ADMIN_ID);
         save(new Meal(LocalDateTime.of(2015, Month.JUNE, 1, 21, 0), "Админ ужин", 1500), ADMIN_ID);
     }
+
 
     @Override
     public Meal save(Meal meal, int userId) {
@@ -53,7 +52,6 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
 
     @PostConstruct
     public void postConstruct() {
-
         log.info("+++ PostConstruct");
     }
 
@@ -94,4 +92,3 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
                         .sorted(Comparator.comparing(Meal::getDateTime).reversed());
     }
 }
-
