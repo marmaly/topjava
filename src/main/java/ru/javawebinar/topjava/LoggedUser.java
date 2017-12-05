@@ -1,4 +1,4 @@
-package ru.javawebinar.topjava;
+/*package ru.javawebinar.topjava;
 
 
 import ru.javawebinar.topjava.model.Role;
@@ -24,3 +24,4 @@ public class LoggedUser {
 
     public boolean isEnabled() {return enabled;}
 }
+*/
