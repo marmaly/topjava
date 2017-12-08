@@ -19,8 +19,8 @@ public class JpaUserRepositoryImpl implements UserRepository {
     private Session openSession() {
         return sessionFactory.getCurrentSession();
     }
-*/
 
+*/
     @PersistenceContext
     private EntityManager em;
 
@@ -42,11 +42,12 @@ public class JpaUserRepositoryImpl implements UserRepository {
     @Override
     public boolean delete(int id) {
 
-/*      User ref = em.getReference(User.class, id);
-        em.remove(ref);
-*/
-        Query query = em.createQuery("DELETE FROM User u WHERE u.id=:id");
+    //  User ref = em.getReference(User.class, id);
+    //   return em.remove(ref);
+
+       Query query = em.createQuery("DELETE FROM User u WHERE u.id=:id");
         return query.setParameter("id", id).executeUpdate() != 0;
+
     }
 
     @Override
