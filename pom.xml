@@ -36,7 +36,6 @@
         <hibernate-validator.version>6.0.5.Final</hibernate-validator.version>
         <javax-el.version>3.0.1-b08</javax-el.version>
 
-
         <!--Tools-->
         <ehcache.version>3.4.0</ehcache.version>
     </properties>
