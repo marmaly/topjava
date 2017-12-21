@@ -1,7 +1,7 @@
 package ru.javawebinar.topjava.web;
 
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ru.javawebinar.topjava.Profiles;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.web.meal.MealRestController;
 
@@ -14,21 +14,24 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 import static ru.javawebinar.topjava.util.TimeUtil.parseLocalDate;
 import static ru.javawebinar.topjava.util.TimeUtil.parseLocalTime;
 
-
 public class MealServlet extends HttpServlet {
 
-    private ConfigurableApplicationContext springContext;
+    private ClassPathXmlApplicationContext springContext;
     private MealRestController mealController;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
+        springContext = new ClassPathXmlApplicationContext(new String[]{"spring/spring-app.xml", "spring/spring-db.xml"}, false);
+//       springContext.setConfigLocations("spring/spring-app.xml", "spring/spring-db.xml");
+        springContext.getEnvironment().setActiveProfiles(Profiles.getActiveDbProfile(), Profiles.REPOSITORY_IMPLEMENTATION);
+        springContext.refresh();
         mealController = springContext.getBean(MealRestController.class);
     }
 
@@ -37,7 +40,6 @@ public class MealServlet extends HttpServlet {
         springContext.close();
         super.destroy();
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -66,28 +68,29 @@ public class MealServlet extends HttpServlet {
         }
     }
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String action = request.getParameter("action");
 
-        if (action == null) {
-            request.setAttribute("meals", mealController.getAll());
-            request.getRequestDispatcher("/meals.jsp").forward(request, response);
-        }
-
-        else if (action.equals("delete")) {
-            int id = getId(request);
-            mealController.delete(id);
-            response.sendRedirect("meals");
-        }
-
-        else {
-            final Meal meal = action.equals("create") ? new Meal(LocalDateTime.now(), "", 1000)
-                    : mealController.get(getId(request));
-            request.setAttribute("meal", meal);
-            request.getRequestDispatcher("add&change.jsp").forward(request, response);
+        switch (action == null ? "all" : action) {
+            case "delete":
+                int id = getId(request);
+                mealController.delete(id);
+                response.sendRedirect("meals");
+                break;
+            case "create":
+            case "update":
+                final Meal meal = "create".equals(action) ?
+                        new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 1000) :
+                        mealController.get(getId(request));
+                request.setAttribute("meal", meal);
+                request.getRequestDispatcher("/mealForm.jsp").forward(request, response);
+                break;
+            case "all":
+            default:
+                request.setAttribute("meals", mealController.getAll());
+                request.getRequestDispatcher("/meals.jsp").forward(request, response);
+                break;
         }
     }
 
@@ -95,5 +98,4 @@ public class MealServlet extends HttpServlet {
         String paramId = Objects.requireNonNull(request.getParameter("id"));
         return Integer.parseInt(paramId);
     }
-
 }
