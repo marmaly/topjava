@@ -1,17 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fn" uri="http://topjava.javawebinar.ru/functions" %>
 <html>
 <head>
-    <link  href="css/style.css">
-    <title>meals</title>
+    <title>Calories management</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <section>
-    <a href="index.html">Home</a>
-    <h2>Meals</h2>
+    <h3>Meals</h3>
     <form method="post" action="meals?action=filter">
         <dl>
             <dt>From Date:</dt>
@@ -48,19 +46,18 @@
             <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.to.MealWithExceed"/>
             <tr class="${meal.exceed ? 'exceeded' : 'normal'}">
                 <td>
-                        ${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}
+                        <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
                         <%--<%=TimeUtil.toString(meal.getDateTime())%>--%>
                         <%--${fn:replace(meal.dateTime, 'T', ' ')}--%>
-                        <%--  ${fn:formatDateTime(meal.dateTime)}--%>
+                        ${fn:formatDateTime(meal.dateTime)}
                 </td>
                 <td>${meal.description}</td>
                 <td>${meal.calories}</td>
                 <td><a href="meals?action=update&id=${meal.id}">Update</a></td>
                 <td><a href="meals?action=delete&id=${meal.id}">Delete</a></td>
-
             </tr>
         </c:forEach>
     </table>
-</section>  `
+</section>
 </body>
 </html>
